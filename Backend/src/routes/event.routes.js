@@ -1,4 +1,4 @@
-import express from "express";
+import { Router } from "express";
 import { verifyAdminJWT } from "../middlewares/auth.middleware.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import {
@@ -10,17 +10,41 @@ import {
   deleteEvent,
 } from "../controllers/event.controllers.js";
 
-const router = express.Router();
+const router = Router();
 
 // 🌍 Public route (no login)
-router.get("/", getAllEvents);
-router.get("/view/:id", getEventByID);
+router.route("/").get(getAllEvents);
+router.route("/view/:id").get(getEventByID);
 
 // 🛡 Protected routes (admin only)
-router.use(verifyAdminJWT);
-router.get("/admin", getAdminEvents);
-router.post("/create", upload.single("image"), createEvent);
-router.put("/update/:id", upload.single("image"), updateEvent);
-router.delete("/delete/:id", deleteEvent);
+router.route("/admin").get(
+  verifyAdminJWT,
+  getAdminEvents
+);
+router.route("/create").post(
+  verifyAdminJWT,
+  upload.fields([
+    {
+      name: "eventImage",
+      maxCount: 1,
+    },
+  ]),
+  createEvent
+);
+router.route("/update/:id").put(
+  verifyAdminJWT,
+  upload.fields([
+    {
+      name: "eventImage",
+      maxCount: 1,
+    },
+  ]),
+  updateEvent
+);
+router.route("/delete/:id").delete(
+  verifyAdminJWT,
+  deleteEvent
+);
+
 
 export default router;
