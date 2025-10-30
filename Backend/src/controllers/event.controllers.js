@@ -13,9 +13,6 @@ export const createEvent = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Title, description, and date are required");
   }
 
-  if (!req.file) {
-    throw new ApiError(400, "Event image is required");
-  }
 
   // 🖼 Upload image to Cloudinary
   const image = req.files?.image?.[0];
