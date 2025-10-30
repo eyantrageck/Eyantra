@@ -85,17 +85,18 @@ export const updateEvent = asyncHandler(async (req, res) => {
 
   // If new image uploaded
   let fileUrl = req.files?.eventImage?.[0];
-  if (!fileUrl?.path) {
-    throw new ApiError(400, "Event image is required");
-  }
 
   // Upload to Cloudinary
-  const uploadedFile = await uploadOnCloudinary(fileUrl.path);
-  if (!uploadedFile) {
-    throw new ApiError(400, "File upload failed");
+  if (fileUrl) {
+    const uploadedFile = await uploadOnCloudinary(fileUrl.path);
+    if (!uploadedFile) {
+      throw new ApiError(400, "File upload failed");
+    }
+    fileUrl = uploadedFile.secure_url;
   }
-  fileUrl = uploadedFile.secure_url;
+
   event.title = title || event.title;
+  event.image = fileUrl || event.image;
   event.subTitle = subTitle || event.subTitle;
   event.description = description || event.description;
   event.date = date || event.date;
