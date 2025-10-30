@@ -18,13 +18,13 @@ export const createEvent = asyncHandler(async (req, res) => {
   }
 
   // 🖼 Upload image to Cloudinary
-  const eventImage = req.files?.eventImage?.[0];
-  if (!eventImage?.path) {
+  const image = req.files?.image?.[0];
+  if (!image?.path) {
     throw new ApiError(400, "Event image is required");
   }
 
   // Upload to Cloudinary
-  const uploadedFile = await uploadOnCloudinary(eventImage.path);
+  const uploadedFile = await uploadOnCloudinary(image.path);
   if (!uploadedFile) {
     throw new ApiError(400, "File upload failed");
   }
@@ -84,7 +84,7 @@ export const updateEvent = asyncHandler(async (req, res) => {
   }
 
   // If new image uploaded
-  let fileUrl = req.files?.eventImage?.[0];
+  let fileUrl = req.files?.image?.[0];
 
   // Upload to Cloudinary
   if (fileUrl) {

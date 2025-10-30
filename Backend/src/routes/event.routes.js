@@ -25,7 +25,7 @@ router.route("/create").post(
   verifyAdminJWT,
   upload.fields([
     {
-      name: "eventImage",
+      name: "image",
       maxCount: 1,
     },
   ]),
@@ -35,7 +35,7 @@ router.route("/update/:id").put(
   verifyAdminJWT,
   upload.fields([
     {
-      name: "eventImage",
+      name: "image",
       maxCount: 1,
     },
   ]),
