@@ -1,0 +1,135 @@
+
+
+import React from "react";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import { delay, motion } from "framer-motion";
+import { FaListUl } from "react-icons/fa";
+import { MdDashboardCustomize } from "react-icons/md";
+import { BiAddToQueue } from "react-icons/bi";
+import { fadeIn } from "../varients";
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+
+const AdminLayout = () => {
+  const navigate = useNavigate();
+
+  const [canRegister, setCanRegister] = useState(false);
+
+  const handleLogout = () => {
+    // Logout logic
+    // clear localStorage
+    localStorage.removeItem("User");
+
+    // Optional: also remove full login data if you want
+    // localStorage.removeItem("loginData");
+
+    console.log("User logged out");
+
+    // Redirect to login page
+    navigate("/admin-login");
+  }
+
+  useEffect(() => {
+    const user = localStorage.getItem("User");
+    if (!user) return;
+
+    try {
+      const parsedUser = JSON.parse(user);
+      console.log("User from adminRegister:", parsedUser);
+
+      const adminEmail = parsedUser?.admin?.email;
+      console.log("Admin email:", adminEmail);
+
+      if (adminEmail === "akshay@gmail.com") {
+        setCanRegister(true);
+      } else {
+        setCanRegister(false);
+      }
+    } catch (err) {
+      console.error("Invalid user data in localStorage:", err);
+    }
+  }, []);
+
+
+  return (
+    <>
+      <div className="bg-white shadow-sm border-b border-gray-200 text-gray-800 p-4 sticky top-0 z-50 font-sans">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          {/* Left Logo Section */}
+          <motion.div
+            variants={fadeIn("down", 40, 0)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true }}
+            className="flex flex-row items-center gap-4"
+          >
+            <Link to="/">
+              <img
+                src="./image/geck.gif"
+                alt="Logo"
+                className="h-12 lg:h-16 w-20 object-contain"
+              />
+            </Link>
+            <Link to="https://www.geckishanganj.org/" target="_blank">
+              <img
+                src="./image/e_yantra.svg"
+                alt="E-Yantra Logo"
+                className="h-10 object-contain"
+              />
+            </Link>
+          </motion.div>
+
+          {/* Right Section - Logout Button */}
+          <div className="flex items-center gap-4">
+            {canRegister && (
+              <Link to="/admin-register">
+                <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-all shadow-sm">
+                  Register Admin
+                </button>
+              </Link>
+            )}
+
+            <button
+              onClick={handleLogout}
+              className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary/90 transition-all shadow-sm"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <div className="flex h-[calc(100vh-100px)]">
+
+        <div className='flex flex-col border-r border-gray-200 min-h-full pt-6 '>
+
+          <NavLink end={true} to='/admin' className={({ isActive }) => `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-primary/10 border-r-4 border-primary"} `}>
+            <MdDashboardCustomize />
+            <p className='hidden md:inline-block'>Dashboard</p>
+          </NavLink>
+          <NavLink to='/admin/addEvent' className={({ isActive }) => `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-primary/10 border-r-4 border-primary"} `}>
+            <BiAddToQueue />
+            <p className='hidden md:inline-block'>Add Event</p>
+          </NavLink>
+          <NavLink to='/admin/events' className={({ isActive }) => `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-primary/10 border-r-4 border-primary"} `}>
+            <FaListUl />
+            <p className='hidden md:inline-block'>Event List</p>
+          </NavLink>
+
+
+
+        </div>
+
+        <div className="w-full max-h-screen overflow-y-auto p-6">
+          <Outlet />
+        </div>
+      </div >
+
+
+    </>
+  );
+};
+
+
+export default AdminLayout

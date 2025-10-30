@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* 👇 Add your custom keyframes */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 👇 Theme customization — Tailwind v4 style */
+@theme {
+  --animate-spin-slow: spin-slow 8s linear infinite;
+
+  --bg-custom-gradient: linear-gradient(
+    to left,
+    #b1ece6,
+    #a0d8d3,
+    #8dc6c1,
+    #7bb4b0
+  );
+
+  --font-orbitron: "Orbitron", sans-serif;
+  --color-primary: #5044E5;
+}
