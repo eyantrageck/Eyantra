@@ -75,7 +75,7 @@ const EditEventModal = ({ event, onClose, onSave }) => {
             };
 
             const { data } = await axios.put(
-                `http://localhost:8000/api/events/update/${event._id}`,
+                `${import.meta.env.VITE_API_BASE}/events/update/${event._id}`,
                 payload,
                 { withCredentials: true }
             );

@@ -16,7 +16,7 @@ const EventList = () => {
   // 🧠 Fetch Admin Events
   const fetchAdminEvents = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/api/events/admin", {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE}/events/admin`, {
         withCredentials: true,
       });
       setEvents(data.data);
@@ -37,7 +37,7 @@ const EventList = () => {
     try {
       setPublishing(eventId);
       await axios.put(
-        `http://localhost:8000/api/events/update/${eventId}`,
+        `${import.meta.env.VITE_API_BASE}/events/update/${eventId}`,
         { isPublished: true },
         { withCredentials: true }
       );
@@ -61,7 +61,7 @@ const EventList = () => {
 
     try {
       setDeleting(eventId);
-      await axios.delete(`http://localhost:8000/api/events/delete/${eventId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_BASE}/events/delete/${eventId}`, {
         withCredentials: true,
       });
       setEvents((prev) => prev.filter((event) => event._id !== eventId));

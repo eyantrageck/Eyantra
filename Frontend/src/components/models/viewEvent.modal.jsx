@@ -12,7 +12,7 @@ const EventModal = ({ id, onClose }) => {
 
     const fetchEvent = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/api/events/view/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE}/events/view/${id}`);
         setEventData(res.data.data || res.data);        
       } catch (err) {
         console.error(err);

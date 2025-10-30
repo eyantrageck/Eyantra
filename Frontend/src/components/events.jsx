@@ -12,7 +12,7 @@ const Events = () => {
   // 🔹 Fetch all public events
   const fetchEvents = async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/api/events");
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE}/events`);
       const events = data.data || [];
 
       const today = new Date();

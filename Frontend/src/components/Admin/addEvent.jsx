@@ -85,7 +85,7 @@ const AddEvent = () => {
     console.log("Description HTML:", description);
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/events/create",
+        `${import.meta.env.VITE_API_BASE}/events/create`,
         formData,
         {
           withCredentials: true, // ✅ Important for cookies / JWT
