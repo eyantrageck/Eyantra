@@ -38,7 +38,7 @@ import adminRoutes from "./routes/admin.routes.js"
 import eventRoutes from "./routes/event.routes.js"
 
 //routes declaration
-app.use("/api/healthcheck", healthcheckRouter)
+app.use("/api/health", healthcheckRouter)
 app.use("/api/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
 
