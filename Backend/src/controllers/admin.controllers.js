@@ -85,6 +85,7 @@ export const loginAdmin = asyncHandler(async (req, res) => {
     const options = {
         httpOnly: true,
         secure: true,
+        sameSite: "None",
     };
     console.log("Logged in Admin:", loggedInAdmin);
     
@@ -127,7 +128,7 @@ export const refreshAccessToken = asyncHandler(async (req, res) => {
 
         const { accessToken, refreshToken: newRefreshToken } = await generateAccessAndRefreshTokens(admin._id);
 
-        const options = { httpOnly: true, secure: true };
+        const options = { httpOnly: true, secure: true, sameSite: "None", };
 
         return res.status(200)
             .cookie("accessToken", accessToken, options)
