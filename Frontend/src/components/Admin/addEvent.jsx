@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FiType, FiFileText, FiCalendar, FiUploadCloud } from "react-icons/fi";
 import Quill from 'quill';
 import axios from "axios";
-
+import { showSuccess, showError, showInfo } from "../../utils/toastUtils.js";
 
 const AddEvent = () => {
   const editorRef = useRef(null);
@@ -97,6 +97,7 @@ const AddEvent = () => {
 
       // ✅ Success
       console.log("✅ Event Created:", response.data);
+      showSuccess("Event created successfully!");
 
       // Optional: Reset form after success
       setTitle("");
@@ -109,6 +110,7 @@ const AddEvent = () => {
 
     } catch (error) {
       console.error("❌ Error creating event:", error);
+      showError("Failed to create event. Please try again.");
     } finally {
       setLoading(false);
     }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "quill/dist/quill.snow.css";
 import { motion } from "framer-motion";
+import { Toaster } from "react-hot-toast";
 
 import Navbar from "./components/navbar.jsx";
 import Footer from "./components/footer.jsx";
@@ -138,6 +139,7 @@ export default function App() {
       transition={{ ease: "linear", duration: 2 }}
     >
       <RouterProvider router={router} />
+      <Toaster position="top-right" reverseOrder={false} />
     </motion.div>
   );
 }

@@ -3,6 +3,8 @@ import axios from "axios";
 import EditEventModal from "../models/EditEvent.modal.jsx";
 import EventModal from "../models/viewEvent.modal.jsx";
 import { FaTrashAlt, FaEdit, FaEye } from "react-icons/fa";
+import { showSuccess, showError, showInfo } from "../../utils/toastUtils.js";
+
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
@@ -46,9 +48,10 @@ const EventList = () => {
           event._id === eventId ? { ...event, isPublished: true } : event
         )
       );
+      showSuccess("Event published successfully!");
     } catch (err) {
       console.error("Failed to publish event:", err);
-      alert("Failed to publish event");
+      showError("Failed to publish event");
     } finally {
       setPublishing(null);
     }
@@ -56,6 +59,8 @@ const EventList = () => {
 
   // 🗑️ Delete Event Handler
   const handleDelete = async (eventId) => {
+    // Confirm deletion
+    
     const confirmDelete = window.confirm("Are you sure you want to delete this event?");
     if (!confirmDelete) return;
 

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { FiCalendar, FiFileText, FiType, FiUploadCloud } from "react-icons/fi";
 import Quill from "quill";
+import { showSuccess, showError, showInfo } from "../../utils/toastUtils.js";
 import "quill/dist/quill.snow.css";
 
 const EditEventModal = ({ event, onClose, onSave }) => {
@@ -45,7 +46,7 @@ const EditEventModal = ({ event, onClose, onSave }) => {
     const handleUpdate = async (e) => {
         e.preventDefault();
         if (!title || !subTitle || !description) {
-            alert("Please fill all required fields.");
+            showError("Please fill all required fields.");
             return;
         }
 
@@ -80,13 +81,14 @@ const EditEventModal = ({ event, onClose, onSave }) => {
                 { withCredentials: true }
             );
 
-            console.log("Event updated successfully!");
+            // console.log("Event updated successfully!");
+            showSuccess("Event updated successfully!");
             onSave(data.data);
             onClose();
             window.location.reload();
         } catch (error) {
             console.error("Error updating event:", error);
-            alert("Failed to update event.");
+            showError("Failed to update event.");
         } finally {
             setLoading(false);
         }
