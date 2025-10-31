@@ -146,7 +146,7 @@ const EventList = () => {
                   <button
                     onClick={() => handlePublish(event._id)}
                     disabled={publishing === event._id}
-                    className="text-sm bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700 disabled:bg-gray-400 transition"
+                    className="text-sm bg-blue-600 text-white px-3 py-1 rounded-md hover:bg-blue-700 cursor-pointer disabled:bg-gray-400 transition"
                   >
                     {publishing === event._id ? "Publishing..." : "Publish"}
                   </button>

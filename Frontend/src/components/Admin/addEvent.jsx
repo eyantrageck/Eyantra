@@ -235,7 +235,7 @@ const AddEvent = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white focus:ring-4 focus:ring-blue-500/50 font-bold rounded-lg px-10 py-3 transition-all duration-300 ease-in-out transform hover:scale-105"
+            className="w-full sm:w-auto bg-blue-600 cursor-pointer hover:bg-blue-700 text-white focus:ring-4 focus:ring-blue-500/50 font-bold rounded-lg px-10 py-3 transition-all duration-300 ease-in-out transform hover:scale-105"
           >
             {loading ? "Saving..." : "Save Event"}
           </button>

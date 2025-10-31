@@ -203,7 +203,7 @@ const EditEventModal = ({ event, onClose, onSave }) => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105"
+                            className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-lg font-semibold transition-all duration-300 cursor-pointer ease-in-out transform hover:scale-105"
                         >
                             {loading ? "Saving..." : "Save Changes"}
                         </button>
