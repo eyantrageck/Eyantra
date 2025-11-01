@@ -115,7 +115,7 @@ const AdminLayout = () => {
 
         </div>
 
-        <div className="w-full max-h-screen overflow-y-auto p-6">
+        <div className="w-full max-h-screen overflow-y-auto p-1 md:p-6">
           <Outlet />
         </div>
       </div>
