@@ -2,10 +2,9 @@
 
 import React from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
-import {motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { FaListUl } from "react-icons/fa";
-import { MdDashboardCustomize, MdManageAccounts } from "react-icons/md";
-import { BiAddToQueue} from "react-icons/bi";
+import { MdDashboardCustomize, MdManageAccounts, MdEmail  } from "react-icons/md";
 import { fadeIn } from "../../shared/varients";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useMemo } from "react";
@@ -15,7 +14,7 @@ const AdminLayout = () => {
 
   const [canRegister, setCanRegister] = useState(false);
 
-   const user = useMemo(() => {
+  const user = useMemo(() => {
     try {
       return JSON.parse(localStorage.getItem("User"));
     } catch {
@@ -35,11 +34,11 @@ const AdminLayout = () => {
     navigate("/admin-login");
   }
 
- 
+
 
 
   return (
-   <>
+    <>
       {/* Top Navbar */}
       <div className="bg-white shadow-sm border-b border-gray-200 text-gray-800 p-4 sticky top-0 z-50 font-sans">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -92,20 +91,28 @@ const AdminLayout = () => {
             <p className="hidden md:inline-block">Dashboard</p>
           </NavLink>
 
-          <NavLink to="/admin/addEvent" className={({ isActive }) => `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-primary/10 border-r-4 border-primary"}`}>
-            <BiAddToQueue />
-            <p className="hidden md:inline-block">Add Event</p>
-          </NavLink>
-
           <NavLink to="/admin/events" className={({ isActive }) => `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-primary/10 border-r-4 border-primary"}`}>
             <FaListUl />
             <p className="hidden md:inline-block">Event List</p>
           </NavLink>
 
           <NavLink to="/admin/manageDevelopers" className={({ isActive }) => `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-primary/10 border-r-4 border-primary"}`}>
-            <MdManageAccounts  />
+            <MdManageAccounts />
             <p className="hidden md:inline-block">Manage Developers</p>
           </NavLink>
+
+          {/* 📬 Contact Responses */}
+          <NavLink
+            to="/admin/contactResponses"
+            className={({ isActive }) =>
+              `flex items-center gap-3 py-3.5 px-3 md:px-9 md:min-w-64 cursor-pointer ${isActive && "bg-primary/10 border-r-4 border-primary"
+              }`
+            }
+          >
+            <MdEmail />
+            <p className="hidden md:inline-block">Contact Responses</p>
+          </NavLink>
+
         </div>
 
         <div className="w-full max-h-screen overflow-y-auto p-6">
