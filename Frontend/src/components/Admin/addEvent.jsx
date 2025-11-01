@@ -4,6 +4,7 @@ import Quill from 'quill';
 import axios from "axios";
 import { showSuccess, showError, showInfo } from "../../utils/toastUtils.js";
 
+
 const AddEvent = () => {
   const editorRef = useRef(null);
   const quillRef = useRef(null);

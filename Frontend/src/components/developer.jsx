@@ -1,43 +1,51 @@
-import React from "react";
-import { delay, motion } from "framer-motion";
-import { rotate, card, fadeIn } from "../shared/varients";
+import React, { useEffect, useState } from "react";
+import axios from "axios"; // <-- Missing import
+import { motion } from "framer-motion";
+import { fadeIn } from "../shared/varients";
 
-const devloperData = [
-  {
-    name: "Mr. Rigvendra Kr. Vardhan",
-    department: "Electronics and Communication",
-    img: "Rig.png",
-    insta: "",
-    linkedin: "",
-    Email: "",
-    GitHub: "",
 
-  },
-  {
-    name: "Md Nafees Alam",
-    department: "Electronics and Communication",
-    img: "Nafees.png",
-    reg: "21104142006",
-    insta: "https://www.instagram.com/nafeesalam281/",
-    linkedin: "https://www.linkedin.com/in/md-nafees-alam-218a1322a/",
-    Email: "nafeesalam281@gmail.com",
-    GitHub: "https://github.com/nafeesalam281",
-    Batch: "2021-25",
-  },
-  {
-    name: "Akshay Kumar",
-    department: "Computer Science and Engineering",
-    img: "AkshayPic.jpg",
-    reg: "24105142007",
-    insta: "https://www.instagram.com/akshay__rishu/",
-    linkedin: "https://www.linkedin.com/in/akshay-kumar-93b487215/",
-    Email: "akshayrishu4@gmail.com",
-    GitHub: "https://github.com/akshay0712-dev",
-    Batch: "2024-28",
-  },
-];
+const Developer = () => {
+  const [developers, setDevelopers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-const Devloper = () => {
+  // Fetch developer data from backend
+  useEffect(() => {
+    const fetchDevelopers = async () => {
+      try {
+        const { data } = await axios.get(
+          `${import.meta.env.VITE_API_BASE}/developers`
+        );
+        setDevelopers(data.data || []);
+        console.log("API response:", data);
+      } catch (err) {
+        console.error("Failed to fetch developers:", err);
+        setError("Unable to load developers. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDevelopers();
+  }, []);
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen text-xl text-gray-600">
+        Loading developers...
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-screen text-red-600">
+        {error}
+      </div>
+    );
+  }
+
   return (
     <>
       <motion.h2
@@ -48,39 +56,51 @@ const Devloper = () => {
         viewport={{ once: true, amount: 0.2 }}
         className="text-5xl mt-20 font-bold font-heading mb-4 text-center text-yellow-600"
       >
-        Developer
+        Developers
       </motion.h2>
+{/* 
+      avatar: "https://res.cloudinary.com/dtdsntsd1/image/upload/v1761980441/eyantra/ulub8c7wdg3g52jofc9k.jpg"
+batch: "2024-28"
+createdAt: "2025-11-01T07:00:39.878Z"
+department: "Computer Science and Engineering"
+email: "akshayrishu4@gmail.com"
+github: "https://github.com/akshay0712-dev"
+instagram: "https://www.instagram.com/akshay__rishu/"
+linkedin: "https://www.linkedin.com/in/akshay-kumar-93b487215/"
+name: "Akshay Kumar"
+registrationNumber: "24105142007" */}
+
       <div className="flex flex-wrap justify-center mt-5 mb-20 gap-20 w-[80vw] mx-auto">
-        {devloperData.map((devloper) => (
-          <div
-            key={devloper.name + devloper.department}
+        {developers.map((dev) => (
+         <div
+            key={dev.name + dev.department}
             className="card group w-64 h-80 rounded-xl shadow-lg bg-white overflow-hidden flex flex-col my-3 items-center p-4 transition-transform transform hover:scale-105 hover:pt-0 hover:px-0 drop-shadow-lg"
           >
             <div className="w-28 h-28 rounded-full overflow-hidden mb-0 mt-6 transition-all duration-500 group-hover:rounded-none group-hover:h-3/5 group-hover:mt-0 group-hover:p-0 group-hover:w-full">
               <img
-                src={`./image/${devloper.img}`}
-                alt={devloper.name}
+                src={`${dev.avatar}`}
+                alt={dev.name}
                 className="w-full h-full object-cover transition-all duration-500"
               />
             </div>
             <div className="flex flex-row justify-evenly gap-1 flex-wrap items-baseline text-center mt-6">
 
               <h2 className="text-lg font-bold  text-gray-900">
-                {devloper.name}
+                {dev.name}
               </h2>
-              <span className="text-xs">{devloper.Batch}</span>
+              <span className="text-xs">{dev.batch}</span>
             </div>
-            <p className="text-sm text-gray-500 mt-2">{devloper.department}</p>
-            <p className={`text-sm text-gray-500 mt-2 ${!devloper.reg && "hidden"}`}>
-              Registation No: {devloper.reg}
+            <p className="text-sm text-gray-500 mt-2">{dev.department}</p>
+            <p className={`text-sm text-gray-500 mt-2 ${!dev.reg && "hidden"}`}>
+              Registation No: {dev.registrationNumber}
             </p>
 
             <div className="flex space-x-3 mt-4 mb-4">
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-gray-600 hover:text-blue-500 ${!devloper.linkedin && "hidden"}`}
-                href={devloper.linkedin}
+                className={`text-gray-600 hover:text-blue-500 ${!dev.linkedin && "hidden"}`}
+                href={dev.linkedin}
               >
                 <svg
                   stroke="currentColor"
@@ -97,8 +117,8 @@ const Devloper = () => {
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-gray-600 hover:text-blue-400 ${!devloper.Email && "hidden"}`}
-                href={`mailto:${devloper.Email}`}
+                className={`text-gray-600 hover:text-blue-400 ${!dev.email && "hidden"}`}
+                href={`mailto:${dev.email}`}
               >
                 <svg
                   stroke="currentColor"
@@ -115,8 +135,8 @@ const Devloper = () => {
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-gray-600 hover:text-gray-900 ${!devloper.GitHub && "hidden"}`}
-                href={devloper.GitHub}
+                className={`text-gray-600 hover:text-gray-900 ${!dev.github && "hidden"}`}
+                href={dev.github}
               >
                 <svg
                   stroke="currentColor"
@@ -133,8 +153,8 @@ const Devloper = () => {
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`text-gray-600 hover:text-pink-500 ${!devloper.insta && "hidden"}`}
-                href={devloper.insta}
+                className={`text-gray-600 hover:text-pink-500 ${!dev.instagram && "hidden"}`}
+                href={dev.instagram}
               >
                 <svg
                   stroke="currentColor"
@@ -156,4 +176,4 @@ const Devloper = () => {
   );
 };
 
-export default Devloper;
+export default Developer;

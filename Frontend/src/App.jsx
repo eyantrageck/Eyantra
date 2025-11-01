@@ -28,6 +28,7 @@ import Dashboard from "./components/Admin/Dashboard.jsx";
 import EventList from "./components/Admin/EventList.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import EventByID from "./components/models/viewEvent.modal.jsx";
+import ManageDevelopers from "./components/Admin/AddDeveloper.jsx";
 
 // ✅ Simple 404 Page
 function ErrorPage() {
@@ -120,6 +121,11 @@ const router = createBrowserRouter([
             path: "/admin/addEvent",
             element: <AddEvent />,
           },
+          {
+            path: "/admin/manageDevelopers",
+            element: <ManageDevelopers />,
+          }
+
 
         ],
       },

@@ -36,11 +36,14 @@ app.use(cookieParser())
 import healthcheckRouter from "./routes/healthcheck.routes.js"
 import adminRoutes from "./routes/admin.routes.js"
 import eventRoutes from "./routes/event.routes.js"
+import developerRoutes from "./routes/developer.routes.js"
+
 
 //routes declaration
 app.use("/api/health", healthcheckRouter)
 app.use("/api/admin", adminRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/developers", developerRoutes);
 
 // http://localhost:8000/api/users/register
 
