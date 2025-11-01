@@ -79,7 +79,7 @@ const AdminLayout = () => {
       {/* Sidebar + Content */}
       <div className="flex h-[calc(100vh-100px)]">
         <div className="flex flex-col border-r border-gray-200 min-h-full pt-6">
-          <div className="px-6 pb-6 border-b border-gray-100">
+          <div className="hidden md:inline-block px-6 pb-6 border-b border-gray-100">
             <h2 className="text-2xl font-semibold text-primary flex items-center gap-2">
               🛠️ Admin Panel
             </h2>
