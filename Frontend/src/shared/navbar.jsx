@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { delay, motion } from "framer-motion";
-import { fadeIn } from "./varients";
+import { fadeIn } from "../shared/varients";
 const Navbar = () => {
   return (
     <div className="bg-[#42a096] text-white p-4 pr-4  font-sans sticky top-0 z-50">
@@ -10,7 +10,7 @@ const Navbar = () => {
           variants={fadeIn("down", 40, 0)}
           initial="hidden"
           whileInView={"show"}
-          viewport={{ once: true}}
+          viewport={{ once: true }}
           className="w-[50vw] md:w-[25vw] flex flex-row "
         >
           <Link to="/">
@@ -24,11 +24,11 @@ const Navbar = () => {
             <img src="./image/e_yantra.svg" alt="Logo" className=" " />
           </Link>
         </motion.div>
-        <motion.nav 
-         variants={fadeIn("down", 40, 0)}
-         initial="hidden"
-         whileInView={"show"}
-         viewport={{ once: true}}
+        <motion.nav
+          variants={fadeIn("down", 40, 0)}
+          initial="hidden"
+          whileInView={"show"}
+          viewport={{ once: true }}
           className="flex flex-row flex-wrap gap-4 text-lg">
           <Link to="/about" className="hover:text-gray-400">
             About

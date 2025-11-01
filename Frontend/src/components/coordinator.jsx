@@ -1,6 +1,6 @@
 import React from "react";
 import { delay, motion } from "framer-motion";
-import { rotate, card, fadeIn } from "./varients";
+import { rotate, card, fadeIn } from "../shared/varients";
 
 const coordinatorData = [
   // {

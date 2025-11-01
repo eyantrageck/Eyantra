@@ -1,5 +1,5 @@
 import { delay, motion } from "framer-motion";
-import { rotate, card, fadeIn } from "./varients";
+import { rotate, card, fadeIn } from "../shared/varients";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -199,11 +199,11 @@ function Home() {
       </div>
       <div className="text-black font-sans w-4/5 mx-auto">
         <motion.header
-         variants={fadeIn("right", 80, 0)}
-         initial="hidden"
-         whileInView={"show"}
-         transition={{ ease: "linear", duration: 0.2 }}
-         viewport={{ once: true, amount: 0.2 }}
+          variants={fadeIn("right", 80, 0)}
+          initial="hidden"
+          whileInView={"show"}
+          transition={{ ease: "linear", duration: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           className="text-2xl font-semibold">
           Our Vision
         </motion.header>

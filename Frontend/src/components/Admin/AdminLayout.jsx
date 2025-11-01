@@ -6,7 +6,7 @@ import { delay, motion } from "framer-motion";
 import { FaListUl } from "react-icons/fa";
 import { MdDashboardCustomize } from "react-icons/md";
 import { BiAddToQueue } from "react-icons/bi";
-import { fadeIn } from "../varients";
+import { fadeIn } from "../../shared/varients";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { delay, motion } from "framer-motion";
-import { rotate, card, fadeIn } from "./varients";
+import { rotate, card, fadeIn } from "../shared/varients";
 
 const trainingImages = [
   "https://www.e-yantra.org/images/training/3d-printer.png",
@@ -41,7 +41,7 @@ const Landing = () => {
           <motion.div
             variants={fadeIn("right", 80, 0)}
             initial="hidden"
-            whileInView={"show"}  
+            whileInView={"show"}
             viewport={{ once: true, amount: 0.2 }}
             className="w-full lg:w-1/2"
           >
@@ -57,10 +57,10 @@ const Landing = () => {
             />
           </motion.div>
           <motion.div
-             variants={fadeIn("left", 80, 0)}
-             initial="hidden"
-             whileInView={"show"}
-             viewport={{ once: true, amount: 0.2 }}
+            variants={fadeIn("left", 80, 0)}
+            initial="hidden"
+            whileInView={"show"}
+            viewport={{ once: true, amount: 0.2 }}
             className="w-full lg:w-1/2 px-2 md:px-8"
           >
             <ul className="py-4 px-2 bg-orange-200 rounded-md">
@@ -123,7 +123,7 @@ const Landing = () => {
             initial="hidden"
             whileInView={"show"}
             viewport={{ once: true, amount: 0.2 }}
-             className="w-full lg:w-1/2 px-2 md:px-8 ">
+            className="w-full lg:w-1/2 px-2 md:px-8 ">
             <ul className="py-4 px-2 bg-orange-200 rounded-md">
               <h2 className="text-2xl font-bold font-heading mb-4 text-center text-yellow-600">
                 What makes us unique
@@ -175,7 +175,7 @@ const Landing = () => {
             initial="hidden"
             whileInView={"show"}
             viewport={{ once: true, amount: 0.2 }}
-             className="w-full lg:w-1/2">
+            className="w-full lg:w-1/2">
             <img
               className="rounded-3xl mb-8 w-full lg:w-auto px-4"
               src="https://www.e-yantra.org/images/eyantra_unique.webp"
@@ -203,21 +203,21 @@ const Landing = () => {
           <div className="flex flex-wrap py-8 justify-center items-center gap-4">
             {trainingImages.map((imgSrc, index) => (
               <motion.div
-              // variants={rotate("clockwise", 180, 2, 0)}
-              initial={
-                {
-                  rotateX:0,
-                  rotateY:180
+                // variants={rotate("clockwise", 180, 2, 0)}
+                initial={
+                  {
+                    rotateX: 0,
+                    rotateY: 180
+                  }
                 }
-              }
-              whileInView={
-                {
-                  rotateX:0,
-                  rotateY:0
+                whileInView={
+                  {
+                    rotateX: 0,
+                    rotateY: 0
+                  }
                 }
-              }
-              viewport={{ once: false, amount: 0.2 }}
-              transition={{ ease: "linear", duration: 1 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ ease: "linear", duration: 1 }}
                 key={index}
                 className="max-w-56 p-4 flex justify-center items-center bg-gray-100 rounded-md"
               >

@@ -1,17 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { delay, motion } from "framer-motion";
-import { fadeIn } from "./varients";
+import { fadeIn } from "../shared/varients";
 
 const Footer = () => {
   return (
     <>
       <motion.div
-       initial={{ opacity: 0 }}
-       whileInView={{ opacity: 1 }}
-       transition={{ ease: "linear", duration: 1 }}
-       viewport={{ once: true }} 
-        className="w-[100vw] bg-[#c7e6e2]  pt-6 pb-6 pl-[5vw] pr-[5vw] mx-auto  grid grid-cols-1 md:grid-cols-[30%_70%]  gap-4 items-center justify-between "
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ ease: "linear", duration: 1 }}
+        viewport={{ once: true }}
+        className="w-screen bg-[#c7e6e2]  pt-6 pb-6 pl-[5vw] pr-[5vw] mx-auto  grid grid-cols-1 md:grid-cols-[30%_70%]  gap-4 items-center justify-between "
       >
         <div className="left flex flex-col">
           <Link to="/" className="w-[50vw] md:w-[25vw] flex flex-row ">
@@ -90,7 +90,7 @@ const Footer = () => {
               <a
                 target="_blank"
                 className="text-red-700 hover:text-red-500 ml-1"
-                //  href=""
+              //  href=""
               >
                 E-Yantra
               </a>
