@@ -22,7 +22,6 @@ import Competition from "./components/competition.jsx";
 import Events from "./components/events.jsx";
 import AdminLogin from "./components/adminLogin.jsx";
 import AdminRegister from "./components/adminRegister.jsx";
-import AddEvent from "./components/Admin/AddEvent.jsx";
 import AdminLayout from "./components/Admin/AdminLayout.jsx";
 import Dashboard from "./components/Admin/Dashboard.jsx";
 import EventList from "./components/Admin/Event.admin.jsx";
@@ -30,6 +29,7 @@ import PrivateRoute from "./PrivateRoute.jsx";
 import EventByID from "./components/models/viewEvent.modal.jsx";
 import ManageDevelopers from "./components/Admin/AddDeveloper.jsx";
 import ContactResponse from "./components/Admin/ContactResponse.jsx";
+import AddEvent from "./components/Admin/AddEvent.jsx";
 
 // ✅ Simple 404 Page
 function ErrorPage() {
