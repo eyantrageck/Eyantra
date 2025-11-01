@@ -153,7 +153,7 @@ const ManageDevelopers = () => {
             variants={fadeIn("up", 40, 0)}
             initial="hidden"
             animate="show"
-            className="bg-slate-50 text-gray-800 min-h-screen p-6 space-y-8">
+            className="bg-gray-50 rounded-2xl text-gray-800 min-h-screen p-2 md:p-6 space-y-8">
             {/* Developer Table */}
             <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-xl shadow-lg p-6 overflow-x-auto">
                 <h2 className="text-xl font-bold mb-4 text-center">Developers</h2>

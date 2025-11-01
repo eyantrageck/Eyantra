@@ -60,9 +60,9 @@ const ContactResponse = () => {
             variants={fadeIn("up", 40, 0)}
             initial="hidden"
             animate="show"
-            className="p-6"
+            className="p-2 md:p-6 bg-gray-50 rounded-2xl"
         >
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-6 ">
                 <h2 className="text-2xl font-semibold text-primary flex items-center gap-2">
                     <FiMail /> Contact Responses
                 </h2>
@@ -83,12 +83,12 @@ const ContactResponse = () => {
                     <table className="min-w-full bg-white text-sm">
                         <thead className="bg-gray-100 text-gray-700 text-left">
                             <tr>
-                                <th className="py-3 px-4">Name</th>
-                                <th className="py-3 px-4">Email</th>
-                                <th className="py-3 px-4">Department</th>
-                                <th className="py-3 px-4">Project Name</th>
-                                <th className="py-3 px-4">Details</th>
-                                <th className="py-3 px-4 text-center">Actions</th>
+                                <th className="py-1 md:py-3 px-2 md:px-4">Name</th>
+                                <th className="py-1 md:py-3 px-2 md:px-4">Email</th>
+                                <th className="py-1 md:py-3 px-2 md:px-4">Department</th>
+                                <th className="py-1 md:py-3 px-2 md:px-4">Project Name</th>
+                                <th className="py-1 md:py-3 px-2 md:px-4">Details</th>
+                                <th className="py-1 md:py-3 px-2 md:px-4 text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,26 +100,26 @@ const ContactResponse = () => {
                                 >
                                     <td
                                         onClick={() => handleView(contact)}
-                                        className="py-3 px-4 font-medium text-gray-800 flex items-center gap-2">
+                                        className="py-1 md:py-3 px-2 md:px-4 font-medium text-gray-800 flex items-center gap-2">
                                         <FiUser className="text-gray-500" /> {contact.name}
                                     </td>
                                     <td
                                         onClick={() => handleView(contact)}
-                                        className="py-3 px-4 text-gray-600">{contact.email}
+                                        className="py-1 md:py-3 px-2 md:px-4 text-gray-600">{contact.email}
                                     </td>
                                     <td
                                         onClick={() => handleView(contact)}
-                                        className="py-3 px-4 text-gray-600"> {contact.department || "-"}
+                                        className="py-1 md:py-3 px-2 md:px-4 text-gray-600"> {contact.department || "-"}
                                     </td>
                                     <td
                                         onClick={() => handleView(contact)}
-                                        className="py-3 px-4 text-gray-600"> {contact.projectName || "-"}
+                                        className="py-1 md:py-3 px-2 md:px-4 text-gray-600"> {contact.projectName || "-"}
                                     </td>
                                     <td
                                         onClick={() => handleView(contact)}
-                                        className="py-3 px-4 text-gray-600 line-clamp-1"> {contact.projectDetail || "-"}
+                                        className="py-1 md:py-3 px-2 md:px-4 text-gray-600 line-clamp-1"> {contact.projectDetail || "-"}
                                     </td>
-                                    <td className="py-3 px-4 text-center">
+                                    <td className="py-1 md:py-3 px-2 md:px-4 text-center">
                                         <button
                                             onClick={() => handleDelete(contact._id)}
                                             className="text-red-500 hover:text-red-600 transition-colors"

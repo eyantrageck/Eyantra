@@ -98,19 +98,23 @@ const EventList = () => {
     return <div className="text-center text-red-600 mt-10 font-medium">{error}</div>;
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 bg-gray-50 rounded-2xl">
       {/* Header with Add Button */}
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold text-gray-800">Your Created Events</h2>
+      <div className="flex flex-col sm:flex-row sm:justify-between  sm:items-center gap-3 sm:gap-0 mb-4 text-center sm:text-left">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+          Your Created Events
+        </h2>
 
         {/* ➕ Add Event Button */}
         <button
           onClick={() => navigate("/admin/addEvent")}
-          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+          className="hidden md:flex items-center justify-center gap-2 bg-blue-600 text-white w-fit sm:w-auto px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200  "
         >
-           <BiAddToQueue /> Add New Event
+          <BiAddToQueue className="text-lg" />
+          <span className="font-medium">Add Event</span>
         </button>
       </div>
+
 
       {/* No Events */}
       {events.length === 0 ? (
@@ -143,11 +147,10 @@ const EventList = () => {
               {/* ⚙️ Actions */}
               <div className="px-4 pb-3 flex items-center justify-between">
                 <span
-                  className={`text-xs font-medium px-2 py-1 rounded-full ${
-                    event.isPublished
+                  className={`text-xs font-medium px-2 py-1 rounded-full ${event.isPublished
                       ? "bg-green-100 text-green-600"
                       : "bg-yellow-100 text-yellow-600"
-                  }`}
+                    }`}
                 >
                   {event.isPublished ? "Published" : "Draft"}
                 </span>
@@ -195,6 +198,13 @@ const EventList = () => {
           ))}
         </div>
       )}
+       <button
+          onClick={() => navigate("/admin/addEvent")}
+          className="flex md:hidden items-center justify-center gap-2 bg-blue-600 text-white w-fit sm:w-auto px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200  "
+        >
+          <BiAddToQueue className="text-lg" />
+          <span className="font-medium">Add Event</span>
+        </button>
 
       {/* 🟢 Edit Modal */}
       {editingEvent && (

@@ -119,7 +119,7 @@ const AddEvent = () => {
 
 
   return (
-    <div className="bg-slate-50 text-gray-800 min-h-screen flex items-center justify-center p-4">
+    <div className="bg-gray-50 rounded-2xl text-gray-800 min-h-screen flex items-center justify-center p-2 md:p-6">
       <form
         onSubmit={onSubmitHandler}
         className="w-full max-w-4xl bg-white border border-gray-200 rounded-xl shadow-lg p-6 md:p-8 space-y-8"

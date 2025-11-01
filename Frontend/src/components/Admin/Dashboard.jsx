@@ -12,6 +12,7 @@ const Dashboard = () => {
   });
   const [status, setStatus] = useState("Checking...");
   const [healthData, setHealthData] = useState(null);
+  const [user, setUser] = useState("");
   const [recentEvents, setRecentEvents] = useState([]);
   const [metrics, setMetrics] = useState({
     latency: "-",
@@ -21,6 +22,10 @@ const Dashboard = () => {
 
   // 🩺 Fetch server health
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("User")) || {};
+    setUser(user.admin.name);
+    
+
     const fetchHealth = async () => {
       const start = performance.now();
       try {
@@ -90,10 +95,10 @@ const Dashboard = () => {
       variants={fadeIn("up", 40, 0)}
       initial="hidden"
       animate="show"
-      className="min-h-[80vh] bg-gray-50 p-6 rounded-2xl shadow-sm font-sans"
+      className="min-h-[80vh] bg-gray-50 rounded-2xl p-2 md:p-6 shadow-sm font-sans"
     >
-      <h1 className="text-3xl font-semibold text-gray-800 mb-6">
-        Welcome, Akshay Kumar 👋
+      <h1 className="text-lg md:text-3xl font-semibold text-gray-800 mb-6">
+        Welcome, {user} 👋
       </h1>
 
       {/* --- Event Stats --- */}
