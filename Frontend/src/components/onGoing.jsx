@@ -47,7 +47,7 @@ const OnGoing = () => {
       <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 ">
         {project.map((proj, index) => (
           <div key={index} className="max-w-sm rounded overflow-hidden shadow-lg m-4">
-            <img className="h-[30vh] md:h-[15vh] lg:h-[30vh] w-[100%] md:w-[30vw]" src={proj.img || "https://dummyimage.com/360x360"} alt={proj.name} />
+            <img className="h-[30vh] md:h-[15vh] lg:h-[30vh] w-screen md:w-[30vw]" src={proj.img || "https://dummyimage.com/360x360"} alt={proj.name} />
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2 text-center">{proj.name}</div>
               <ul className="grid grid-cols-2 ">
