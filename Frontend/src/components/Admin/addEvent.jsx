@@ -110,8 +110,17 @@ const AddEvent = () => {
       if (quillRef.current) quillRef.current.root.innerHTML = "";
 
     } catch (error) {
-      console.error("❌ Error creating event:", error);
-      showError("Failed to create event. Please try again.");
+      if (error.response?.status == 401) {
+        localStorage.removeItem("User");
+        toast.error("Session expired. Please log in again.");
+        navigate("/admin-login");
+        console.log("reloading to Login");
+        window.location.reload();
+      } else {
+        console.error("❌ Error creating event:", error);
+        showError("Failed to create event. Please try again.");
+        toast.error("Failed to create event. Please try again.");
+      }
     } finally {
       setLoading(false);
     }

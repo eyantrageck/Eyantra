@@ -32,6 +32,7 @@ const AdminLayout = () => {
     localStorage.removeItem("User");
     console.log("User logged out");
     navigate("/admin-login");
+    
   }
 
 

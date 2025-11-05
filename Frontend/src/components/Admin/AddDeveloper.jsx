@@ -141,8 +141,16 @@ const ManageDevelopers = () => {
 
             fetchDevelopers();
         } catch (error) {
-            console.error(error);
-            showError("Action failed. Try again.");
+            if (error.response?.status == 401) {
+                localStorage.removeItem("User");
+                toast.error("Session expired. Please log in again.");
+                navigate("/admin-login");
+                console.log("reloading to Login");
+                window.location.reload();
+            } else {
+                console.error(error);
+                showError("Action failed. Try again.");
+            }
         } finally {
             setLoading(false);
         }
@@ -157,19 +165,20 @@ const ManageDevelopers = () => {
             {/* Developer Table */}
             <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-xl shadow-lg p-6 overflow-x-auto">
                 <h2 className="text-xl font-bold mb-4 text-center">Developers</h2>
-                <table className="min-w-full border border-gray-200 rounded-lg overflow-hidden">
-                    <thead className="bg-gray-100 text-gray-700 uppercase text-sm font-semibold">
-                        <tr>
-                            <th className="py-3 px-4 border">Avatar</th>
-                            <th className="py-3 px-4 border">Name</th>
-                            <th className="py-3 px-4 border">Department</th>
-                            <th className="py-3 px-4 border">Batch</th>
-                            <th className="py-3 px-4 border">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {developers.length > 0 ? (
-                            developers.map((dev) => (
+                {developers.length > 0 ? (
+                    <table className="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+                        <thead className="bg-gray-100 text-gray-700 uppercase text-sm font-semibold">
+                            <tr>
+                                <th className="py-3 px-4 border">Avatar</th>
+                                <th className="py-3 px-4 border">Name</th>
+                                <th className="py-3 px-4 border">Department</th>
+                                <th className="py-3 px-4 border">Batch</th>
+                                <th className="py-3 px-4 border">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {developers.map((dev) => (
                                 <tr key={dev._id} className="text-center border-t hover:bg-gray-50">
                                     <td className="py-2 px-3 border">
                                         <img
@@ -198,17 +207,17 @@ const ManageDevelopers = () => {
                                         </div>
                                     </td>
                                 </tr>
-                            ))
-                        ) : (
-                            <tr>
-                                <td colSpan="5" className="py-6 text-gray-500 text-center">
-                                    No developers found
-                                </td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <div className="py-6 text-gray-500 text-center">
+                        No developers found
+                    </div>
+                )
+                }
             </div>
+
 
             {/* Add / Edit Developer Form */}
             <form

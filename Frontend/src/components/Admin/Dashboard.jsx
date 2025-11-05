@@ -22,9 +22,14 @@ const Dashboard = () => {
 
   // 🩺 Fetch server health
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("User")) || {};
-    setUser(user.admin.name);
-    
+    console.log("User",localStorage.getItem("User"));
+
+    const userData = JSON.parse(localStorage.getItem("User") || "null");
+    if (userData?.admin?.name) {
+      console.log("User:", userData.admin.name);
+      setUser(userData.admin.name);
+    }
+
 
     const fetchHealth = async () => {
       const start = performance.now();
@@ -65,9 +70,9 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchAdminEvents = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_BASE}/events/admin`, {
-          withCredentials: true,
-        });
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE}/events/admin`,
+          { withCredentials: true, }
+        );
         const data = res.data?.data || [];
 
         const published = data.filter((e) => e.isPublished).length;
@@ -83,7 +88,18 @@ const Dashboard = () => {
         const sorted = data.sort((a, b) => new Date(b.date) - new Date(a.date));
         setRecentEvents(sorted.slice(0, 3));
       } catch (err) {
-        console.error("Error fetching admin events:", err);
+        if (err.response?.status == 401) {
+          console.log("field to load Data:", err);
+          localStorage.removeItem("User");
+          toast.error("Error status:", err.response?.status);
+          toast.error("Session expired. Please log in again.");
+          navigate("/admin-login", { replace: true });
+          console.log("reloading to Login");
+        } else {
+          toast.error(`Error status: ${err.response?.status}`);
+          console.error("Error fetching admin events:", err);
+          toast.error("Failed to fetch admin events");
+        }
       }
     };
 

@@ -27,8 +27,17 @@ const EventList = () => {
       );
       setEvents(data.data);
     } catch (err) {
-      setError("Failed to load events");
-      console.error(err);
+      if (err.response?.status == 401) {
+        localStorage.removeItem("User");
+        toast.error("Session expired. Please log in again.");
+        navigate("/admin-login");
+        console.log("reloading to Login");
+        window.location.reload();
+      } else {
+        setError("Failed to load events");
+        console.error(err);
+        toast.error("Failed to load events");
+      }
     } finally {
       setLoading(false);
     }
@@ -53,9 +62,19 @@ const EventList = () => {
         )
       );
       showSuccess("Event published successfully!");
-    } catch (err) {
-      console.error("Failed to publish event:", err);
-      showError("Failed to publish event");
+    } catch (error) {
+
+      if (error.response?.status == 401) {
+        localStorage.removeItem("User");
+        toast.error("Session expired. Please log in again.");
+        navigate("/admin-login");
+        console.log("reloading to Login");
+        window.location.reload();
+      } else {
+        console.error("Failed to publish event:", error);
+        showError("Failed to publish event");
+        toast.error("Failed to publish event");
+      }
     } finally {
       setPublishing(null);
     }
@@ -148,8 +167,8 @@ const EventList = () => {
               <div className="px-4 pb-3 flex items-center justify-between">
                 <span
                   className={`text-xs font-medium px-2 py-1 rounded-full ${event.isPublished
-                      ? "bg-green-100 text-green-600"
-                      : "bg-yellow-100 text-yellow-600"
+                    ? "bg-green-100 text-green-600"
+                    : "bg-yellow-100 text-yellow-600"
                     }`}
                 >
                   {event.isPublished ? "Published" : "Draft"}
@@ -198,13 +217,13 @@ const EventList = () => {
           ))}
         </div>
       )}
-       <button
-          onClick={() => navigate("/admin/addEvent")}
-          className="flex md:hidden items-center justify-center gap-2 bg-blue-600 text-white w-fit sm:w-auto px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200  "
-        >
-          <BiAddToQueue className="text-lg" />
-          <span className="font-medium">Add Event</span>
-        </button>
+      <button
+        onClick={() => navigate("/admin/addEvent")}
+        className="flex md:hidden items-center justify-center gap-2 bg-blue-600 text-white w-fit sm:w-auto px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200  "
+      >
+        <BiAddToQueue className="text-lg" />
+        <span className="font-medium">Add Event</span>
+      </button>
 
       {/* 🟢 Edit Modal */}
       {editingEvent && (

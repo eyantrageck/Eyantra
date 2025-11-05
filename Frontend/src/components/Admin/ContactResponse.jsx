@@ -5,12 +5,15 @@ import { toast } from "react-hot-toast";
 import ViewContactModal from "../models/ViewContact.modal.jsx";
 import { motion } from "framer-motion";
 import { fadeIn } from "../../shared/varients";
+import { useNavigate, Navigate } from 'react-router-dom';
 
 const ContactResponse = () => {
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedContact, setSelectedContact] = useState(null); // 👈 track selected contact
     const [showModal, setShowModal] = useState(false);
+    const [error, setError] = useState("")
+    const navigate = useNavigate();
 
     // 🔹 Fetch all contact responses
     useEffect(() => {
@@ -22,8 +25,15 @@ const ContactResponse = () => {
                 );
                 setContacts(data.data || []);
             } catch (error) {
-                console.error(error);
-                toast.error("Failed to fetch contact responses");
+                if (error.response?.status == 401) {
+                    localStorage.removeItem("User");
+                    toast.error("Session expired. Please log in again.");
+                    navigate("/admin-login");
+                    console.log("reloading to Login");
+                } else {
+                    console.error("Failed to fetch contact responses", error);
+                    toast.error("Failed to fetch contact responses");
+                }
             } finally {
                 setLoading(false);
             }
@@ -42,8 +52,16 @@ const ContactResponse = () => {
             setContacts((prev) => prev.filter((c) => c._id !== id));
             toast.success("Response deleted successfully");
         } catch (error) {
-            console.error(error);
-            toast.error("Failed to delete response");
+
+            if (error.response?.status == 401) {
+                localStorage.removeItem("User");
+                toast.error("Session expired. Please log in again.");
+                navigate("/admin-login");
+                window.location.reload();
+            } else {
+                console.error(error);
+                toast.error("Failed to delete response");
+            }
         }
     };
 
@@ -77,6 +95,7 @@ const ContactResponse = () => {
             ) : contacts.length === 0 ? (
                 <div className="text-center text-gray-500 py-10">
                     No contact responses found.
+                    <div className="">{error}</div>
                 </div>
             ) : (
                 <div className="overflow-x-auto rounded-lg shadow-sm border border-gray-200">
